@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuarios{
+id String @id @default(uuid())
+name String
+email  String @unique
+cfp String
+senha String
+Favoritos Casas[]
+}
+
+model Casas {
+  id        String    @id @default(uuid())
+  Usuarios  Usuarios?  @relation(fields: [usuarioId], references: [id])
+  usuarioId String?
+  name      String
+  imagens   String    // Campo para armazenar URLs de imagens como JSON
+  price     Float
+  avaiation Float
+  pais      String
+  Local     String
+  
+}
+
+
