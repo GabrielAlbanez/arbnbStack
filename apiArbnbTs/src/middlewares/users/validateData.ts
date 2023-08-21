@@ -11,7 +11,7 @@ export const ValidateData = async (req: Request, res: Response, next: NextFuncti
     const cpfValido = cpfValid.isValid(cpf)
     const emailValido = EmailValidator.validate(email)
 
-    if (!name || !email || !senha) {
+    if (!name || !email || !senha || !cpf) {
         return res.status(400).json({ error: "Preencha todos os campos" })
     }
 

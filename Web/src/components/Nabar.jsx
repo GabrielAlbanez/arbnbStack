@@ -60,10 +60,10 @@ export default function Nabar() {
     } transition-transform duration-1000`}>
         <LinkPersonalizado caminho={"/"}>
           {" "}
-          <img src={logo} alt="" height={130} width={130}  />{" "}
+          <img src={logo} alt="" height={130} width={130}   />{" "}
         </LinkPersonalizado>
 
-        <div className="hidden sm:block">
+        <div className="hidden sm:block pl-16">
           <div
             className=" flex items-center justify-between w-[35vh] 
       h-[4vh] px-4 shadow-md transition hover:shadow-xl border-[1px] rounded-full"
@@ -81,30 +81,12 @@ export default function Nabar() {
           <div className="flex flex-row gap-10 items-center">
             <div
               onClick={openMeu}
-              className="rounded-full border-[1px] relative flex justify-center cursor-pointer transition shadow-md hover:shadow-xl items-center h-[5vh] w-[7vh]"
+              className="flex  gap-12"
             >
-              <IoIosMenu size={25} />
-              <FaUser size={25} />
+              <button onClick={() => handleOpenModal("Login")} className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition shadow-md  hover:shadow-xl">Login</button>
+              <button onClick={() => handleOpenModal("Registro")} className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition  shadow-md  hover:shadow-xl">Registro</button>
             </div>
-            {isOpen && (
-              <>
-                <div className="bg-white  h-[10vh] w-[150px] left-[88%]  absolute top-20 mr-10 flex flex-col items-center gap-3 shadow-lg transition hover:shadow-2xl rounded-md py-3  ">
-                  <div
-                    className=" w-[100%]  relative flex items-center justify-center cursor-pointer "
-                    onClick={() => handleOpenModal("Login")}
-                  >
-                    Login
-                  </div>
-                  <div
-                    className=" w-[100%] relative flex items-center justify-center cursor-pointer "
-                    onClick={() => handleOpenModal("Registro")}
-                  >
-                   Registro
-               
-                  </div>
-                </div>
-              </>
-            )}
+            
           </div>
         </div>
       </div>
