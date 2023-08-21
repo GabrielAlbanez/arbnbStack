@@ -11,7 +11,7 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { paisSelecioanaod } = useTema();
-
+  const [visible, setVisible] = useState(true);
   const fetchData = () => {
     setTimeout(async () => {
       try {
@@ -38,11 +38,23 @@ export default function Home() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (visible) {
+      const timer = setTimeout(() => {
+        setVisible(false);
+      },); 
+
+      return () => clearTimeout(timer);
+    }
+  }, [visible]);
+
   console.log(data);
   console.log(paisSelecioanaod);
 
   return (
-    <div className="text-3xl pt-10   w-screen  ">
+    <div   className={`w-screen pt-10  transform ${
+      visible ? "scale-0" : "scale-100"
+    } transition-transform duration-1000`}>
       <FilterBar />
       <div>
         {isLoading ? (
