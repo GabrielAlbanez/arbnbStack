@@ -3,14 +3,17 @@ import ReactDOM from "react-dom/client";
 import "./App.css";
 import App from "./App";
 import PaisProvider from "./context/Contexto";
+import LoginProvider from "./context/SessionLogin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <LoginProvider>
   <PaisProvider>
   <React.StrictMode>
     <App />
   </React.StrictMode>
   </PaisProvider>
+  </LoginProvider>
 
 );
 

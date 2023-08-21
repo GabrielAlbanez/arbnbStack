@@ -4,13 +4,23 @@ import { AiOutlineUndo } from "react-icons/ai";
 import { AiTwotoneStar } from "react-icons/ai";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import "./casaFiltrada.css";
+import { useSessionLogin } from "../../context/SessionLogin";
+import Toaster from "../Toaster/Toaster";
 
 export default function CasaFIltrada() {
   const { id } = useParams();
   const [click, setClick] = useState(false);
 
-  const handleClickIcon = () => {
-    setClick((click) => !click);
+  const { isLoggedIn, setisLoggedIn } = useSessionLogin();
+  const [showToas, setshowToas] = useState(false);
+
+  const verifyLogin = () => {
+    if (isLoggedIn) {
+      setClick((click) => !click);
+    } else {
+      setshowToas(true);
+      console.log(showToas);
+    }
   };
 
   const [dataById, setDataById] = useState([]);
@@ -18,10 +28,14 @@ export default function CasaFIltrada() {
 
   const getHomeByid = async () => {
     try {
-      const url = `http://localhost:3333/home/${id}`;
-      const response = await fetch(url);
+      const url = `http://10.112.240.164:8080/casa/${id}`;
+      const response = await fetch(url, {
+        cache: "default",
+      });
       const responseData = await response.json();
-      setDataById(responseData);
+      const homeFilter = responseData;
+      setDataById(homeFilter);
+      console.log(dataById);
       setIsLoading(false);
     } catch (error) {
       console.log("erro ao obter dados");
@@ -32,6 +46,8 @@ export default function CasaFIltrada() {
   useEffect(() => {
     getHomeByid();
   }, []);
+
+  const imagensArray = dataById.data ? JSON.parse(dataById.data.imagens) : [];
 
   return (
     <div>
@@ -54,9 +70,10 @@ export default function CasaFIltrada() {
           className="w-screen h-[100vh] flex justify-center "
           style={{ animation: "slideOutToTop 0.8s " }}
         >
-          <div className="border-[1px] h-[100vh] w-[60%] pt-10">
+          <div className="h-[100vh] w-[80%] pt-10">
+            {showToas && <Toaster hasClose={setshowToas} mensagem={'vc precisa estar logado'}/>}
             <div className="flex flex-col gap-4">
-              <h1 className="text-3xl ">{dataById.local}</h1>
+              <h1 className="text-3xl ">{dataById.data.Local}</h1>
               <div className="flex items-center gap-3 pr-5">
                 <div className="flex flex-row items-center gap-3 w-[40%]">
                   <div className="flex gap-1 ">
@@ -64,16 +81,16 @@ export default function CasaFIltrada() {
                       <AiTwotoneStar size={20} />
                     </p>
                     {/*esse numero de avalição vai ser passado pelo json*/}
-                    <p>4,99</p>
+                    <p>{dataById.data.avaiation}</p>
                   </div>
                   {/*esse numero de comentarios vai ser passado pelo json*/}
                   <p>109 comentarios</p>
-                  <p>{dataById.pais}</p>
+                  <p>{dataById.data.pais}</p>
                 </div>
                 <div className=" w-[60%] flex items-center justify-end">
                   <div className="flex gap-2 items-center">
                     <p>Salvar</p>
-                    <div onClick={handleClickIcon} >
+                    <div onClick={verifyLogin} className="cursor-pointer">
                       {click === false ? (
                         <AiOutlineHeart size={25} />
                       ) : (
@@ -83,8 +100,24 @@ export default function CasaFIltrada() {
                   </div>
                 </div>
               </div>
-              <div className="border-[1px] h-[60vh]">
-                <img src={dataById.imagens.img1} alt=""  className="rounded-md h-[60vh] w-[60vh] object-cover"/>
+              <div className=" h-[60vh] flex gap-2">
+                <img
+                  src={imagensArray[0]}
+                  alt=""
+                  className="rounded-md h-[60vh] w-[80vh] object-cover"
+                />
+                <div className="flex gap-2">
+                  <img
+                    src={imagensArray[1]}
+                    alt=""
+                    className="rounded-md h-[60vh] w-[37vh] object-cover"
+                  />
+                  <img
+                    src={imagensArray[2]}
+                    alt=""
+                    className="rounded-md h-[60vh] w-[37vh] object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>

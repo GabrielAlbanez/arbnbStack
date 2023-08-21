@@ -13,9 +13,15 @@ export default function Nabar() {
   const [showModalLogin, setShowModalViewLogin] = useState(false);
   const [showModalRegister, setShowModalViewRegister] = useState(false);
   
+  
+  
+
+
   const openMeu = () => {
     setIsOpen((valor) => !valor);
   };
+
+
 
   
 
@@ -36,7 +42,7 @@ export default function Nabar() {
       <div className="w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8">
         <LinkPersonalizado caminho={"/"}>
           {" "}
-          <img src={logo} alt="" height={130} width={130} />{" "}
+          <img src={logo} alt="" height={130} width={130}  />{" "}
         </LinkPersonalizado>
 
         <div className="hidden sm:block">

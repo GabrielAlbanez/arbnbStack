@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function Home() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { paisSelecioanaod} = useTema();
+  const { paisSelecioanaod } = useTema();
 
   const fetchData = () => {
     setTimeout(async () => {
@@ -22,7 +22,7 @@ export default function Home() {
           throw new Error("Erro ao obter os dados.");
         }
         const responseData = await response.json();
-        const homes = responseData 
+        const homes = responseData;
         setData(homes);
         setIsLoading(false);
       } catch (error) {
@@ -68,10 +68,7 @@ export default function Home() {
               </div> */}
                     <div>
                       {/* <Link to={`/casas/${casas.id}`}> */}
-                      <CarrouselImg
-                        id={casas.id}
-                        imagens={casas.imagens}
-                      />
+                      <CarrouselImg id={casas.id} imagens={casas.imagens} />
                       {/* </Link> */}
                     </div>
                     <div className="flex flex-col gap-1 p-1">
@@ -83,7 +80,7 @@ export default function Home() {
                         {casas.Local}
                       </div>
                       <div className="text-lg">{casas.pais}</div>
-                      <Link to={`/casas/${casas.id}`}>
+                      <Link to={`/casa/${casas.id}`}>
                         <div className="text-lg flex gap-2 items-center">
                           {" "}
                           <BsEyeFill /> ver mais..
@@ -105,12 +102,7 @@ export default function Home() {
               </div> */}
                     <div>
                       {/* <Link to={`/casas/${casas.id}`}> */}
-                      <CarrouselImg
-                        id={casas.id}
-                        img1={casas.imagens.img1}
-                        img2={casas.imagens.img2}
-                        img3={casas.imagens.img3}
-                      />
+                      <CarrouselImg id={casas.id} imagens={casas.imagens} />
                       {/* </Link> */}
                     </div>
                     <div className="flex flex-col gap-1 p-2">
@@ -122,8 +114,11 @@ export default function Home() {
                         {casas.local}
                       </div>
                       <div className="text-lg">{casas.pais}</div>
-                      <Link to={`/casas/${casas.id}`}>
-                        <div className="text-lg flex gap-2 items-center"> <BsEyeFill />  ver mais...</div>
+                      <Link to={`/casa/${casas.id}`}>
+                        <div className="text-lg flex gap-2 items-center">
+                          {" "}
+                          <BsEyeFill /> ver mais...
+                        </div>
                       </Link>
                     </div>
                   </div>
