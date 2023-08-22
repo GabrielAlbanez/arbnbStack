@@ -13,7 +13,7 @@ export default function Toaster({ mensagem, hasClose, visible }) {
 
   return (
     <div
-    className={`fixed bottom-0 right-0 p-1 mb-5 transform 
+    className={`fixed bottom-0 right-0 p-1 mb-5 transform  z-50
     } transition-transform duration-500 ease-in-out bg-red-400`}
   >
       <div className="bg-white z-50 text-black px-4 py-4 rounded flex flex-col items-center justify-center w-[50vh] h-[100%]">

@@ -75,7 +75,7 @@ export default function ModalLogin({ handleClose }) {
   return (
     <>
       <div
-        className={`absolute z-50  inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md transform ${
+        className={`absolute z-50  inset-0 flex items-center justify-center bg-black bg-opacity-50  transform ${
           visible ? "scale-0" : "scale-100"
         } transition-transform duration-500`}
       >

@@ -5,13 +5,18 @@ import LinkPersonalizado from "./Link";
 import ModalRegister from "./Modal/ModalRegister";
 import ModalLogin from "./Modal/ModalLogin";
 import { useSessionRegister } from "../context/SessionRegister";
+import Toaster from "./Toaster/Toaster";
 export default function Nabar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModalLogin, setShowModalViewLogin] = useState(false);
   const [showModalRegister, setShowModalViewRegister] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [showToas, setshowToas] = useState(true);
+  const closeToaster = () => {
+    setshowToas(false);
+  };
 
-  const { isRegisterIn,setisRegisterIn } = useSessionRegister();
+  const { isRegisterIn, setisRegisterIn } = useSessionRegister();
 
   const openMeu = () => {
     setIsOpen((valor) => !valor);
@@ -42,9 +47,8 @@ export default function Nabar() {
   return (
     <div>
       <div
-        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${
-          visible ? "scale-0" : "scale-100"
-        } transition-transform duration-1000`}
+        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${visible ? "scale-0" : "scale-100"
+          } transition-transform duration-1000`}
       >
         <LinkPersonalizado caminho={"/"}>
           {" "}
@@ -102,8 +106,17 @@ export default function Nabar() {
 
       {isRegisterIn && (
         <div className="h-1/2 w-screen">
-          {" "}
-          <ModalLogin handleClose={()=>{setisRegisterIn(false)}}/>
+
+          {showToas && (
+            <Toaster
+              setVisible={setshowToas}
+              visible={showToas}
+              hasClose={closeToaster}
+              mensagem={'Registro realizado com sucesso'}
+            />
+          )}
+
+          <ModalLogin handleClose={() => { setisRegisterIn(false) }} />
         </div>
       )}
     </div>
