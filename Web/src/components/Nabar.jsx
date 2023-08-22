@@ -1,29 +1,21 @@
 import logo from "../assets/imgs/Airbnb-Logo-768x279.png";
 import React, { useEffect, useState } from "react";
-import { IoIosMenu } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import LinkPersonalizado from "./Link";
-import { useLocation } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
 import ModalRegister from "./Modal/ModalRegister";
 import ModalLogin from "./Modal/ModalLogin";
+import { useSessionRegister } from "../context/SessionRegister";
 export default function Nabar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [openBar,setOpenBar] = useState(false);
   const [showModalLogin, setShowModalViewLogin] = useState(false);
   const [showModalRegister, setShowModalViewRegister] = useState(false);
   const [visible, setVisible] = useState(true);
-  
-  
 
+  const { isRegisterIn,setisRegisterIn } = useSessionRegister();
 
   const openMeu = () => {
     setIsOpen((valor) => !valor);
   };
-
-
-  
-  
 
   const handleOpenModal = (name) => {
     name === "Login"
@@ -37,30 +29,26 @@ export default function Nabar() {
       : setShowModalViewRegister(false);
   };
 
-
   useEffect(() => {
     if (visible) {
       const timer = setTimeout(() => {
         setVisible(false);
-      }); 
+      });
 
       return () => clearTimeout(timer);
     }
   }, [visible]);
 
-
-
-
-
-
   return (
     <div>
-      <div className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${
-      visible ? "scale-0" : "scale-100"
-    } transition-transform duration-1000`}>
+      <div
+        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${
+          visible ? "scale-0" : "scale-100"
+        } transition-transform duration-1000`}
+      >
         <LinkPersonalizado caminho={"/"}>
           {" "}
-          <img src={logo} alt="" height={130} width={130}   />{" "}
+          <img src={logo} alt="" height={130} width={130} />{" "}
         </LinkPersonalizado>
 
         <div className="hidden sm:block pl-16">
@@ -79,14 +67,20 @@ export default function Nabar() {
 
         <div className="">
           <div className="flex flex-row gap-10 items-center">
-            <div
-              onClick={openMeu}
-              className="flex  gap-12"
-            >
-              <button onClick={() => handleOpenModal("Login")} className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition shadow-md  hover:shadow-xl">Login</button>
-              <button onClick={() => handleOpenModal("Registro")} className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition  shadow-md  hover:shadow-xl">Registro</button>
+            <div onClick={openMeu} className="flex  gap-12">
+              <button
+                onClick={() => handleOpenModal("Login")}
+                className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition shadow-md  hover:shadow-xl"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => handleOpenModal("Registro")}
+                className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition  shadow-md  hover:shadow-xl"
+              >
+                Registro
+              </button>
             </div>
-            
           </div>
         </div>
       </div>
@@ -104,6 +98,13 @@ export default function Nabar() {
         <>
           <ModalRegister handleClose={() => handleCloseModal("Registro")} />
         </>
+      )}
+
+      {isRegisterIn && (
+        <div className="h-1/2 w-screen">
+          {" "}
+          <ModalLogin handleClose={()=>{setisRegisterIn(false)}}/>
+        </div>
       )}
     </div>
   );

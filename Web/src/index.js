@@ -4,9 +4,11 @@ import "./App.css";
 import App from "./App";
 import PaisProvider from "./context/Contexto";
 import LoginProvider from "./context/SessionLogin";
+import RegisetrProvider from "./context/SessionRegister";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <RegisetrProvider>
   <LoginProvider>
   <PaisProvider>
   <React.StrictMode>
@@ -14,6 +16,7 @@ root.render(
   </React.StrictMode>
   </PaisProvider>
   </LoginProvider>
+  </RegisetrProvider>
 
 );
 

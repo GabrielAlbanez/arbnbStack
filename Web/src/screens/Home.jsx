@@ -7,11 +7,14 @@ import FilterBar from "../components/FilterBar";
 import { useTema } from "../context/Contexto";
 import { Link } from "react-router-dom";
 
+import ModalLogin from "../components/Modal/ModalLogin";
+
 export default function Home() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { paisSelecioanaod } = useTema();
   const [visible, setVisible] = useState(true);
+
   const fetchData = () => {
     setTimeout(async () => {
       try {
@@ -42,7 +45,7 @@ export default function Home() {
     if (visible) {
       const timer = setTimeout(() => {
         setVisible(false);
-      },); 
+      });
 
       return () => clearTimeout(timer);
     }
@@ -52,9 +55,13 @@ export default function Home() {
   console.log(paisSelecioanaod);
 
   return (
-    <div   className={`w-screen pt-10  transform ${
-      visible ? "scale-0" : "scale-100"
-    } transition-transform duration-1000`}>
+    <div
+      className={`w-screen pt-10  transform ${
+        visible ? "scale-0" : "scale-100"
+      } transition-transform duration-1000`}
+    >
+
+
       <FilterBar />
       <div>
         {isLoading ? (
@@ -119,11 +126,11 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col gap-1 p-2">
                       <div className="text-lg">
-                        <p>${casas.preco} por noite</p>
+                        <p>${casas.price} por noite</p>
                       </div>
                       <div className="text-lg flex flex-row items-center">
                         <IoMdPin size={20} />
-                        {casas.local}
+                        {casas.Local}
                       </div>
                       <div className="text-lg">{casas.pais}</div>
                       <Link to={`/casa/${casas.id}`}>

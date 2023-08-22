@@ -13,6 +13,9 @@ export default function CasaFIltrada() {
 
   const { isLoggedIn, setisLoggedIn } = useSessionLogin();
   const [showToas, setshowToas] = useState(false);
+  const closeToaster = () => {
+    setshowToas(false);
+  };
 
   const verifyLogin = () => {
     if (isLoggedIn) {
@@ -28,7 +31,7 @@ export default function CasaFIltrada() {
 
   const getHomeByid = async () => {
     try {
-      const url = `http://192.168.15.95:8080/casa/${id}`;
+      const url = `http://10.112.240.164:8080/casa/${id}`;
       const response = await fetch(url, {
         cache: "no-store",
       });
@@ -71,7 +74,14 @@ export default function CasaFIltrada() {
           style={{ animation: "slideOutToTop 0.8s " }}
         >
           <div className="h-[100vh] w-[80%] pt-10">
-            {showToas && <Toaster hasClose={setshowToas} mensagem={'vc precisa estar logado'}/>}
+          {showToas && (
+          <Toaster
+            setVisible={setshowToas}
+            visible={showToas}
+            hasClose={closeToaster} // Usar a função closeToaster para fechar o Toaster
+            mensagem={'Você precisa estar logado'}
+          />
+        )}
             <div className="flex flex-col gap-4">
               <h1 className="text-3xl ">{dataById.data.Local}</h1>
               <div className="flex items-center gap-3 pr-5">
