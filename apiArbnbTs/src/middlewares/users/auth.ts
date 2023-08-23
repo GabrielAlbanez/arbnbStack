@@ -82,13 +82,18 @@ export const authLogin = async (
     const decode: any = jwt.verify(generateToken, "8080");
     req.session['user'] = decode;
     req.session['token'] = generateToken;
+
+
    
-    res.cookie('Gazeta', emailDatabase, {
+    res.cookie('dataUser', JSON.stringify(emailDatabase), {
         maxAge: 60 * 60 * 1000, // Tempo de expiração do cookie (1 hora)
         httpOnly: true, // O cookie não pode ser acessado via JavaScript no cliente
         sameSite: 'strict', // Limitar o envio do cookie apenas para o mesmo site
         // secure: true, // Em produção, ative essa opção para HTTPS
       });
+
+
+
   } catch (error) {
     res.status(400).json({ error: "token invalido" });
   }

@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -8,32 +9,44 @@ export default function Account() {
   const { isLoggedIn, setisLoggedIn, dataUser, setDataUser } = useSessionLogin()
   const navigate = useNavigate()
 
-  console.log(isLoggedIn)
+
+   
+ 
 
 
-  
 
 
 
   useEffect(()=>{
 
-    if(!isLoggedIn){
-      setTimeout(()=>{
+    if(!name && !email){
         navigate('/')
-
-      })
     } else {
+
+      setDataUser({
+        name : Cookies.get('name'),
+        email : Cookies.get('email')
+      })
+      setisLoggedIn(true)
         
     }
 
+    
+  console.log(isLoggedIn)
+
   },[isLoggedIn])
-  console.log(dataUser)
+
+
+  const name = Cookies.get("name");
+  const email = Cookies.get("email");
+
   return (
     <div className='text-3xl p-8'>
       {
-        isLoggedIn ? (
+        name && email ? (
           <>
-            <h1>Welcome : {dataUser?.user?.emailDatabase?.name}</h1>
+            <h1>Welcome : {dataUser?.name}</h1>
+            <h1>email : {dataUser?.email}</h1>
           </>
         ) : (
           <>

@@ -15,6 +15,7 @@ export default function ModalLogin({ handleClose }) {
     const {setisLoggedIn,setDataUser,dataUser} = useSessionLogin()
     const navigate = useNavigate()
 
+
     const [dataLogin, setDataLogin] = useState({
         email: "",
         senha: ""
@@ -53,8 +54,8 @@ export default function ModalLogin({ handleClose }) {
                 setToasterMEssage(responseData.error)
             } else {
                 setisLoggedIn(true)
-                setDataUser(decodeURIComponent(Cookies.get('Gazeta')))
-                Cookies.set('authToken', responseData.token);
+                Cookies.set('name',decodeURIComponent(responseData.user.emailDatabase.name))
+                Cookies.set('email',decodeURIComponent(responseData.user.emailDatabase.email))
                 handleClose()
                 navigate('/account')
             }

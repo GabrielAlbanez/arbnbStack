@@ -7,13 +7,14 @@ import ModalLogin from "./Modal/ModalLogin";
 import { useSessionRegister } from "../context/SessionRegister";
 import Toaster from "./Toaster/Toaster";
 import { useSessionLogin } from "../context/SessionLogin";
+import Cookies from "js-cookie";
 export default function Nabar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModalLogin, setShowModalViewLogin] = useState(false);
   const [showModalRegister, setShowModalViewRegister] = useState(false);
   const [visible, setVisible] = useState(true);
   const [showToas, setshowToas] = useState(true);
-  const { isLoggedIn } = useSessionLogin();
+  const { isLoggedIn,setisLoggedIn } = useSessionLogin();
   const closeToaster = () => {
     setshowToas(false);
   };
@@ -36,6 +37,15 @@ export default function Nabar() {
       : setShowModalViewRegister(false);
   };
 
+  const setCokies = ()=>{
+    Cookies.remove('name')
+    Cookies.remove('email')
+    setisLoggedIn(false)
+
+  }
+  const name = Cookies.get("name");
+  const email = Cookies.get("email");
+
   useEffect(() => {
     if (visible) {
       const timer = setTimeout(() => {
@@ -49,9 +59,8 @@ export default function Nabar() {
   return (
     <div>
       <div
-        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${
-          visible ? "scale-0" : "scale-100"
-        } transition-transform duration-1000`}
+        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${visible ? "scale-0" : "scale-100"
+          } transition-transform duration-1000`}
       >
         <LinkPersonalizado caminho={"/"}>
           {" "}
@@ -71,9 +80,17 @@ export default function Nabar() {
             </div>
           </div>
         </div>
-        {isLoggedIn ? (
+        {name && email ? (
           <>
+          <div className="flex gap-4 items-center">
             <h1>conta</h1>
+            <button
+              onClick={setCokies}
+              className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition  shadow-md  hover:shadow-xl"
+            >
+              Logout
+            </button>
+            </div>
           </>
         ) : (
           <>
