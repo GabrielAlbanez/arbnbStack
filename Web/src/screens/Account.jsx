@@ -14,7 +14,6 @@ export default function Account() {
   
 
 
-  const data = []
 
   useEffect(()=>{
 
@@ -22,14 +21,9 @@ export default function Account() {
       setTimeout(()=>{
         navigate('/')
 
-      },3000)
+      })
     } else {
-     data.push(dataUser.user.emailDatabase.name)
-     data.push(dataUser.user.emailDatabase.email)
-     data.push(dataUser.token)
-     const token = dataUser.token
-     localStorage.setItem("authToken",token)
-     console.log(data)
+        
     }
 
   },[isLoggedIn])
@@ -39,7 +33,7 @@ export default function Account() {
       {
         isLoggedIn ? (
           <>
-            <h1>Wlcome : {dataUser.user.emailDatabase.name}</h1>
+            <h1>Welcome : {dataUser?.user?.emailDatabase?.name}</h1>
           </>
         ) : (
           <>
