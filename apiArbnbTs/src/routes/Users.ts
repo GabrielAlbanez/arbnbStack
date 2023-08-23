@@ -16,7 +16,7 @@ Rotauser.delete('/user/:id',ControlerUsers.deleteUser)
 Rotauser.post('/MarkFavorite',ControlerUsers.FavoriteHome)
 Rotauser.post('/RemoveFavorite',ControlerUsers.removeFavorite)
 Rotauser.post('/Login',authLogin,(req : Request,res :Response)=>{
-    res.status(200).json({message : "Login realizado por: ", user : req.user, token : req.token,})
+    res.status(200).json({message : "Login realizado por: ", user : req.session['user'], token : req.session['token'],})
 })
 Rotauser.post('/fogetPassword',ControlerUsers.updatePassword);
 

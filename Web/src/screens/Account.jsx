@@ -27,7 +27,7 @@ export default function Account() {
     }
 
   },[isLoggedIn])
-
+  console.log(dataUser)
   return (
     <div className='text-3xl p-8'>
       {

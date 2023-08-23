@@ -4,6 +4,7 @@ import { IoMdClose } from 'react-icons/io';
 import Toaster from '../Toaster/Toaster';
 import { useSessionLogin } from '../../context/SessionLogin';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 export default function ModalLogin({ handleClose }) {
 
     
@@ -11,7 +12,7 @@ export default function ModalLogin({ handleClose }) {
     const [visible, setVisible] = useState(true);
     const [showToas, setshowToas] = useState(false);
     const [toasterMessage, setToasterMEssage] = useState('')
-    const {setisLoggedIn,setDataUser} = useSessionLogin()
+    const {setisLoggedIn,setDataUser,dataUser} = useSessionLogin()
     const navigate = useNavigate()
 
     const [dataLogin, setDataLogin] = useState({
@@ -32,11 +33,13 @@ export default function ModalLogin({ handleClose }) {
         e.preventDefault()
         try {
             const response = await fetch("http://localhost:8080/Login", {
+
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(dataLogin),
+                credentials : 'include'
             });
 
             const responseData = await response.json()
@@ -50,12 +53,13 @@ export default function ModalLogin({ handleClose }) {
                 setToasterMEssage(responseData.error)
             } else {
                 setisLoggedIn(true)
-                setDataUser(responseData)
+                setDataUser(decodeURIComponent(Cookies.get('Gazeta')))
+                Cookies.set('authToken', responseData.token);
                 handleClose()
                 navigate('/account')
             }
             console.log(responseData)
-            console.log(dataLogin)
+            
         }
         catch (error) {
             console.log(error)
