@@ -6,6 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import "./casaFiltrada.css";
 import { useSessionLogin } from "../../context/SessionLogin";
 import Toaster from "../Toaster/Toaster";
+import Cookies from "js-cookie";
 
 export default function CasaFIltrada() {
   const { id } = useParams();
@@ -17,8 +18,11 @@ export default function CasaFIltrada() {
     setshowToas(false);
   };
 
+  const name = Cookies.get("name");
+  const email = Cookies.get("email");
+
   const verifyLogin = () => {
-    if (isLoggedIn) {
+    if (name && email) {
       setClick((click) => !click);
     } else {
       setshowToas(true);
@@ -101,7 +105,7 @@ export default function CasaFIltrada() {
                   <div className="flex gap-2 items-center">
                     <p>Salvar</p>
                     <div onClick={verifyLogin} className="cursor-pointer">
-                      {click === false ? (
+                      {!click  ? (
                         <AiOutlineHeart size={25} />
                       ) : (
                         <AiFillHeart size={25} />

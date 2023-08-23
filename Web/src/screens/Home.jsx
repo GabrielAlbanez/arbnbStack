@@ -32,7 +32,7 @@ export default function Home() {
         console.error("Erro na requisição:", error);
         setIsLoading(false);
       }
-    }, [2000]);
+    }, [100]);
   };
 
   const dataFiltrado = data.filter((casas) => casas.pais === paisSelecioanaod);
