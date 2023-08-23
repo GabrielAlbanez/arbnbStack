@@ -88,11 +88,11 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const FavoriteHome = async (req: Request, res: Response) => {
 
-  const { usuarioId, casaId } = req.body
+  const { usuarioEmail, casaId } = req.body
 
   try {
     const usuario = await prisma.usuarios.update({
-      where: { id: usuarioId },
+      where: { email: usuarioEmail },
       data: {
         Favoritos: {
           connect: { id: casaId }

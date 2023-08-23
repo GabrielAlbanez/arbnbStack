@@ -8,13 +8,20 @@ import { useSessionRegister } from "../context/SessionRegister";
 import Toaster from "./Toaster/Toaster";
 import { useSessionLogin } from "../context/SessionLogin";
 import Cookies from "js-cookie";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { BsPerson } from "react-icons/bs";
+import ModalPerfil from "./Modal/ModalPerfil";
+import { useTema } from "../context/Contexto";
 export default function Nabar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModalLogin, setShowModalViewLogin] = useState(false);
   const [showModalRegister, setShowModalViewRegister] = useState(false);
+  const {showModalPerfil, setShowModalPeril} = useTema()
   const [visible, setVisible] = useState(true);
   const [showToas, setshowToas] = useState(true);
-  const { isLoggedIn,setisLoggedIn } = useSessionLogin();
+  const { isLoggedIn, setisLoggedIn } = useSessionLogin();
+ 
+  
   const closeToaster = () => {
     setshowToas(false);
   };
@@ -37,12 +44,12 @@ export default function Nabar() {
       : setShowModalViewRegister(false);
   };
 
-  const setCokies = ()=>{
-    Cookies.remove('name')
-    Cookies.remove('email')
-    setisLoggedIn(false)
-
-  }
+  const setCokies = () => {
+    Cookies.remove("name");
+    Cookies.remove("email");
+    setisLoggedIn(false);
+    window.location.reload();
+  };
   const name = Cookies.get("name");
   const email = Cookies.get("email");
 
@@ -56,11 +63,14 @@ export default function Nabar() {
     }
   }, [visible]);
 
+
+
   return (
     <div>
       <div
-        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${visible ? "scale-0" : "scale-100"
-          } transition-transform duration-1000`}
+        className={`w-screen border-b-[1px] h-[9vh] flex items-center justify-between p-8 transform ${
+          visible ? "scale-0" : "scale-100"
+        } transition-transform duration-1000`}
       >
         <LinkPersonalizado caminho={"/"}>
           {" "}
@@ -82,14 +92,10 @@ export default function Nabar() {
         </div>
         {name && email ? (
           <>
-          <div className="flex gap-4 items-center">
-            <h1>conta</h1>
-            <button
-              onClick={setCokies}
-              className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition  shadow-md  hover:shadow-xl"
-            >
-              Logout
-            </button>
+            <div className="flex gap-4 items-center rounded-full border-[1px] py-2 px-2 shadow-md cursor-pointer transition hover:shadow-xl hover:shadow-zinc-300 ">
+           
+                <BsPerson size={30} onClick={() => setShowModalPeril(true)}/>
+            
             </div>
           </>
         ) : (
@@ -116,6 +122,29 @@ export default function Nabar() {
           </>
         )}
       </div>
+
+      {showModalPerfil && (
+        <>
+          {" "}
+          <ModalPerfil handleClose={()=>setShowModalPeril(false)}>
+            <div className="flex items-center flex-col">
+              <div className="flex flex-col items-center h-[45vh] justify-center gap-32">
+            <div><p className="text-xl">your favorites</p></div>
+            <div><Link to={'/account'}><p className="text-xl">conta</p></Link></div>
+            </div>
+            <div className="w-[60vh] border-t-[1px] flex items-center justify-center h-[10vh]">
+            <button
+              onClick={setCokies}
+              className="border-rose-500 border-[1px] rounded-md w-[10vh] h-[4vh]  transition  shadow-md  hover:shadow-xl"
+            >
+              Logout
+            </button>
+            </div>
+            </div>
+          </ModalPerfil>
+        </>
+      )}
+
       {showModalLogin && (
         <>
           <ModalLogin

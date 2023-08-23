@@ -35,7 +35,7 @@ export default function CasaFIltrada() {
 
   const getHomeByid = async () => {
     try {
-      const url = `http://10.53.49.43:8080/casa/${id}`;
+      const url = `http://192.168.15.95:8080/casa/${id}`;
       const response = await fetch(url, {
         cache: "no-store",
       });

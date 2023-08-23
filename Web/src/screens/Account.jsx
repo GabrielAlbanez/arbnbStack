@@ -1,13 +1,18 @@
 import Cookies from 'js-cookie'
 import React from 'react'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSessionLogin } from '../context/SessionLogin'
+import { useTema } from '../context/Contexto'
 
 export default function Account() {
-
+  
   const { isLoggedIn, setisLoggedIn, dataUser, setDataUser } = useSessionLogin()
   const navigate = useNavigate()
+  const {showModalPerfil, setShowModalPeril} = useTema()
+  const local = useLocation()
+  console.log(local.pathname)
+
 
 
    
@@ -35,6 +40,13 @@ export default function Account() {
   console.log(isLoggedIn)
 
   },[isLoggedIn])
+
+  useEffect(()=>{
+    if(local.pathname == '/account'){
+      setShowModalPeril(false)
+    }
+
+  },[])
 
 
   const name = Cookies.get("name");
