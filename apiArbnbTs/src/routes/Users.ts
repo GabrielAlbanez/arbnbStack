@@ -9,7 +9,7 @@ const Rotauser = Router()
 Rotauser.get('/users',ControlerUsers.getAllUsers);
 
 Rotauser.get('/user/:id',ControlerUsers.getByIdUser)
-Rotauser.get('/userFavorite',ControlerUsers.allFavorites)
+Rotauser.get('/userFavorite/:email',ControlerUsers.allFavorites)
 Rotauser.post('/userC',ValidateData,ControlerUsers.createUser)
 Rotauser.put('/user/:id',ControlerUsers.updataUser)
 Rotauser.delete('/user/:id',ControlerUsers.deleteUser)

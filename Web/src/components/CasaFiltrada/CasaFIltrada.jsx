@@ -8,8 +8,10 @@ import { useSessionLogin } from "../../context/SessionLogin";
 import Toaster from "../Toaster/Toaster";
 import Cookies from "js-cookie";
 
+
 export default function CasaFIltrada() {
   const { id } = useParams();
+   localStorage.setItem('clik',false)
   const [click, setClick] = useState(false);
 
   const { isLoggedIn, setisLoggedIn } = useSessionLogin();
@@ -26,6 +28,8 @@ export default function CasaFIltrada() {
       setClick((click) => !click);
     } else {
       setshowToas(true);
+      setClick(false)
+      
       console.log(showToas);
     }
   };
@@ -35,14 +39,13 @@ export default function CasaFIltrada() {
 
   const getHomeByid = async () => {
     try {
-      const url = `http://192.168.15.95:8080/casa/${id}`;
+      const url = `http://10.112.240.164:8080/casa/${id}`;
       const response = await fetch(url, {
         cache: "no-store",
       });
       const responseData = await response.json();
       const homeFilter = responseData;
       setDataById(homeFilter);
-      console.log(dataById);
       setIsLoading(false);
     } catch (error) {
       console.log("erro ao obter dados");
@@ -53,6 +56,28 @@ export default function CasaFIltrada() {
   useEffect(() => {
     getHomeByid();
   }, []);
+
+
+  const markFavorite = async () => {
+    try {
+        const response = await fetch("http://localhost:8080/MarkFavorite", {
+
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email,id}),
+        });
+
+        const responseData = await response.json()
+        setClick(true)
+        alert(responseData)
+        
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
 
   const imagensArray = dataById.data ? JSON.parse(dataById.data.imagens) : [];
 
@@ -106,7 +131,9 @@ export default function CasaFIltrada() {
                     <p>Salvar</p>
                     <div onClick={verifyLogin} className="cursor-pointer">
                       {!click  ? (
-                        <AiOutlineHeart size={25} />
+                        
+                        <AiOutlineHeart onClick={markFavorite} size={25} />
+                        
                       ) : (
                         <AiFillHeart size={25} />
                       )}

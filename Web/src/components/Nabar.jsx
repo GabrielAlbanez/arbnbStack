@@ -49,6 +49,7 @@ export default function Nabar() {
     Cookies.remove("email");
     setisLoggedIn(false);
     window.location.reload();
+
   };
   const name = Cookies.get("name");
   const email = Cookies.get("email");
@@ -129,7 +130,7 @@ export default function Nabar() {
           <ModalPerfil handleClose={()=>setShowModalPeril(false)}>
             <div className="flex items-center flex-col">
               <div className="flex flex-col items-center h-[45vh] justify-center gap-32">
-            <div><p className="text-xl">your favorites</p></div>
+            <div><Link to={`/Favorite/${email}`}><p className="text-xl">Your Favorite</p></Link></div>
             <div><Link to={'/account'}><p className="text-xl">conta</p></Link></div>
             </div>
             <div className="w-[60vh] border-t-[1px] flex items-center justify-center h-[10vh]">

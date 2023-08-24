@@ -6,6 +6,7 @@ import Contatos from "../screens/Contatos";
 import Account from "../screens/Account";
 import Produtos from "../screens/Produtos";
 import CasaFIltrada from "../components/CasaFiltrada/CasaFIltrada";
+import YourFavorites from "../screens/YourFavorites";
 
 
 
@@ -20,7 +21,9 @@ export default function Rotas() {
         <Route path="/contatos" element={<Contatos/>}/>
         <Route path="/account" element={<Account/>}/>
         <Route path="/casa/:id" element={<CasaFIltrada/>}/>
+        <Route path="/Favorite/:email" element={<YourFavorites/>}/>
       </Routes>
     </BrowserRouter>
   );
 }
+

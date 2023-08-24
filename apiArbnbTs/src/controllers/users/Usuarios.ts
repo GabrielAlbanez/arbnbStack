@@ -88,19 +88,19 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const FavoriteHome = async (req: Request, res: Response) => {
 
-  const { usuarioEmail, casaId } = req.body
+  const { email, id } = req.body
 
   try {
     const usuario = await prisma.usuarios.update({
-      where: { email: usuarioEmail },
+      where: { email: email },
       data: {
         Favoritos: {
-          connect: { id: casaId }
+          connect: { id: id }
         }
       }
     });
 
-    res.json(usuario);
+    res.json('casa favoritada');
   }
   catch (error) {
     res.status(500).json({ error: 'Erro ao marcar casa como favorita.' });
@@ -109,12 +109,12 @@ export const FavoriteHome = async (req: Request, res: Response) => {
 
 export const removeFavorite = async (req: Request, res: Response) => {
 
-  const { usuarioId, casaId } = req.body
+  const { email, casaId } = req.body
 
   try {
 
     await prisma.usuarios.update({
-      where: { id: usuarioId },
+      where: { email: email },
       data: {
         Favoritos: {
           disconnect: { id: casaId }
@@ -137,7 +137,7 @@ export const removeFavorite = async (req: Request, res: Response) => {
 
 export const allFavorites = async (req: Request, res: Response) => {
 
-  const email = req.query.email as string
+  const email = req.params.email 
 
   try {
 
