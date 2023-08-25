@@ -49,6 +49,7 @@ export default function Nabar() {
     Cookies.remove("email");
     setisLoggedIn(false);
     window.location.reload();
+    
 
   };
   const name = Cookies.get("name");
