@@ -89,7 +89,7 @@ export default function YourFavorites() {
                     {casas.Local}
                   </div>
                   <div className="text-lg">{casas.pais}</div>
-                  <Link to={`/casa/${casas.id}`}>
+                  <Link to={`/favoriteHome/${casas.id}`}>
                     <div className="text-lg flex gap-2 items-center">
                       {" "}
                       <BsEyeFill /> ver mais..

@@ -27,7 +27,6 @@ export default function CasaFIltrada() {
       setClick((click) => !click);
     } else {
       setshowToas(true);
-      setClick(false)
       
       console.log(showToas);
     }
@@ -69,7 +68,7 @@ export default function CasaFIltrada() {
         });
 
         const responseData = await response.json()
-        setClick(true)
+        // setClick(true)
         
     }
     catch (error) {

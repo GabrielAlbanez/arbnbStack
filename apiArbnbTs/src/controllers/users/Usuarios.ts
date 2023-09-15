@@ -109,7 +109,7 @@ export const FavoriteHome = async (req: Request, res: Response) => {
 
 export const removeFavorite = async (req: Request, res: Response) => {
 
-  const { email, casaId } = req.body
+  const { email, id } = req.body
 
   try {
 
@@ -117,7 +117,7 @@ export const removeFavorite = async (req: Request, res: Response) => {
       where: { email: email },
       data: {
         Favoritos: {
-          disconnect: { id: casaId }
+          disconnect: { id: id }
         }
       }
     })
