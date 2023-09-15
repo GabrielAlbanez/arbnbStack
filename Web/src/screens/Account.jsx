@@ -45,6 +45,7 @@ export default function Account() {
       reader.onloadend = () => {
         setSelectedImage(reader.result);
         setImg(reader.result)
+        console.log(img)
       };
       reader.readAsDataURL(file);
     }
@@ -77,11 +78,12 @@ export default function Account() {
   
       const responseData = await response.json()
       console.log(responseData)
+      console.log(data)
     } catch (error) {
       console.log(error);
     }
   };
-
+ 
   console.log(dataUser)
 
   return (

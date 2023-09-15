@@ -19,7 +19,7 @@ Rotauser.post('/Login',authLogin,(req : Request,res :Response)=>{
     res.status(200).json({message : "Login realizado por: ", user : req.session['user'], token : req.session['token'],})
 })
 Rotauser.post('/fogetPassword',ControlerUsers.updatePassword);
-Rotauser.post('updateImgPerfil',ControlerUsers.updateImgUser)
+Rotauser.post('/updateImgPerfil',ControlerUsers.updateImgUser)
 
 export default Rotauser;
 
