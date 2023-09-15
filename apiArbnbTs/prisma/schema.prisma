@@ -16,6 +16,7 @@ name String
 email  String @unique
 cfp String
 senha String
+img String?
 Favoritos Casas[]
 }
 

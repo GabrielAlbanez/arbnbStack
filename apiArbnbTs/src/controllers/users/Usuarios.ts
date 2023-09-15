@@ -69,6 +69,34 @@ export const updataUser = async (req: Request, res: Response) => {
   }
 };
 
+
+export const updateImgUser = async (req : Request, res : Response) =>{
+
+  try {
+    const { email, img } = req.body;
+
+    const imageBuffer = Buffer.from(img, 'base64');
+
+  
+    // Converte o Buffer em uma string base64
+    const imgBase64 = imageBuffer.toString('base64');
+  
+    const user = await prisma.usuarios.update({
+      where: {
+        email: email
+      },
+      data: {
+        img: imgBase64
+      }
+    });
+  
+    res.status(201).json({ message: 'Imagem trocada com sucesso' });
+  } catch (error) {
+    res.status(500).json({ Err: 'Erro ao trocar imagem', error });
+  }
+
+}
+
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const Userid = req.params.id;
