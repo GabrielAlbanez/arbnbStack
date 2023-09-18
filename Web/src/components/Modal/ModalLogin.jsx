@@ -12,7 +12,7 @@ export default function ModalLogin({ handleClose }) {
     const [visible, setVisible] = useState(true);
     const [showToas, setshowToas] = useState(false);
     const [toasterMessage, setToasterMEssage] = useState('')
-    const {setisLoggedIn,setDataUser,dataUser} = useSessionLogin()
+    const {setisLoggedIn,setImgCliente} = useSessionLogin()
     const navigate = useNavigate()
 
 
@@ -56,6 +56,7 @@ export default function ModalLogin({ handleClose }) {
                 setisLoggedIn(true)
                 Cookies.set('name',decodeURIComponent(responseData.user.emailDatabase.name))
                 Cookies.set('email',decodeURIComponent(responseData.user.emailDatabase.email))
+          
                 handleClose()
             }
             console.log(responseData)

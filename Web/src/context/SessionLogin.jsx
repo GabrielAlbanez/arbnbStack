@@ -9,6 +9,8 @@ const SessionLogin = createContext()
 export default function LoginProvider({ children }) {
   const [isLoggedIn, setisLoggedIn] = useState(false)
   const [dataUser, setDataUser] = useState(null)
+  const [imgCliente,setImgCliente] = useState(null)
+  
 
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function LoginProvider({ children }) {
 
 
   return (
-    <SessionLogin.Provider value={{ isLoggedIn, setisLoggedIn, dataUser, setDataUser }}>
+    <SessionLogin.Provider value={{ isLoggedIn, setisLoggedIn, dataUser, setDataUser,imgCliente,setImgCliente }}>
       {children}
     </SessionLogin.Provider>
   )

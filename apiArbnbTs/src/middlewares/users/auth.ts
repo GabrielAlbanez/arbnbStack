@@ -67,6 +67,7 @@ export const authLogin = async (
     select: {
       email: true,
       name: true,
+      img : true
     },
   });
 

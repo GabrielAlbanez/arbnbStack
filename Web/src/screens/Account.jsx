@@ -7,11 +7,12 @@ import { FaCamera } from 'react-icons/fa'; // Importe o ícone desejado
 import perfil from '../assets/imgs/perfilPadrão.avif';
 
 export default function Account() {
-  const { isLoggedIn, setisLoggedIn, dataUser, setDataUser } = useSessionLogin();
+  const { isLoggedIn, setisLoggedIn, dataUser, setDataUser,imgCliente } = useSessionLogin();
   const navigate = useNavigate();
   const { showModalPerfil, setShowModalPeril } = useTema();
   const local = useLocation();
   const [selectedImage, setSelectedImage] = useState(null);
+
   const [img,setImg] = useState(null)
   const fileInputRef = useRef(null);
 
@@ -35,6 +36,10 @@ export default function Account() {
     }
   }, []);
 
+  
+
+
+
   const name = Cookies.get('name');
   const email = Cookies.get('email');
 
@@ -43,18 +48,11 @@ export default function Account() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSelectedImage(reader.result);
-        setImg(reader.result)
-        console.log(img)
+        setImg(reader.result);
       };
+      
       reader.readAsDataURL(file);
     }
-
-
- 
-
-
-
 
 
   };
@@ -66,6 +64,7 @@ export default function Account() {
 
   const updateImg = async () => {
     try {
+
       const data = { email, img }; // Crie um objeto com os campos email e img
       const dataJson = JSON.stringify(data)
       const response = await fetch("http://localhost:8080/updateImgPerfil", {
@@ -83,16 +82,17 @@ export default function Account() {
       console.log(error);
     }
   };
- 
-  console.log(dataUser)
+
+ console.log(img)
+
 
   return (
     <div className="text-3xl p-8">
       {name && email ? (
         <div className="flex flex-col gap-6">
           <div className="relative w-[100px] h-[100px]">
-            {selectedImage ? (
-              <img src={selectedImage} alt="Selected" className="object-cover w-full h-full rounded-lg" />
+            {img ? (
+              <img src={img} alt="Selected" className="object-cover w-full h-full rounded-lg" />
             ) : (
               <img src={perfil} alt="Default" className="object-cover w-full h-full rounded-lg" />
             )}
@@ -116,6 +116,8 @@ export default function Account() {
 
             <h1>Welcome: {dataUser?.name}</h1>
             <h1>Email: {dataUser?.email}</h1>
+            <img src={imgCliente} alt="" />
+                
             <button onClick={updateImg} className='border-[1px] rounded-xl border-rose-500'>att img</button>
           </div>
         </div>

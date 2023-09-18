@@ -35,6 +35,32 @@ export const getByIdUser = async (req: Request, res: Response) => {
   }
 };
 
+export const getByImgUser = async(req : Request, res : Response)=>{
+
+  try {
+    const { email } = req.body;
+
+    const user = await prisma.usuarios.findUnique({
+      where: {
+        email: email,
+      },
+      select: {
+        img: true, 
+      },
+    });
+
+    if (user) {
+      res.json({ img: user.img });
+    } else {
+      res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Ocorreu um erro ao buscar o usuário:', error);
+    res.status(500).json({ message: 'Erro ao buscar o usuário.' });
+  }
+};
+
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const { name, email, cpf, senha } = req.body;
@@ -86,7 +112,7 @@ export const updateImgUser = async (req : Request, res : Response) =>{
         email: email
       },
       data: {
-        img: imgBase64
+        img: img
       }
     });
   

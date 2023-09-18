@@ -20,6 +20,7 @@ Rotauser.post('/Login',authLogin,(req : Request,res :Response)=>{
 })
 Rotauser.post('/fogetPassword',ControlerUsers.updatePassword);
 Rotauser.post('/updateImgPerfil',ControlerUsers.updateImgUser)
+Rotauser.post('/imgPerfil',ControlerUsers.getByImgUser)
 
 export default Rotauser;
 
