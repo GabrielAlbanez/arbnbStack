@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <div
-      className={`w-screen pt-10  transform ${
+      className={`  w-screen pt-10  transform ${
         visible ? "scale-0" : "scale-100"
       } transition-transform duration-1000`}
     >
@@ -74,7 +74,7 @@ export default function Home() {
             </button>
           </div>
         ) : (
-          <div className="flex flex-row gap-10 pt-10 flex-wrap items-center justify-center  w-screen py-10">
+          <div className="  flex flex-row gap-10 pt-10 flex-wrap items-center justify-center  w-screen py-10">
             {paisSelecioanaod === null ? (
               <>
                 {data.map((casas) => (

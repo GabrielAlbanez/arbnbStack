@@ -3,6 +3,7 @@ import RotaCasa from "./routes/Casas"
 import Rotauser from "./routes/Users"
 import cors from "cors";
 import session from "express-session";
+
 const app = express()
 const porta = process.env.PORT || 8080
 app.use(express.json())
@@ -20,6 +21,8 @@ app.use(
        //tem que ativar isso com true no front end para enviar os cokies http
     })
   );
+
+
   
 
 app.get('/', (req: Request, res: Response) => {

@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import Toaster from "../Toaster/Toaster";
 import { useSessionRegister } from "../../context/SessionRegister";
 
+
 export default function ModalLogin({ handleClose }) {
   const [visible, setVisible] = useState(true);
   const [formData, setFormData] = useState({

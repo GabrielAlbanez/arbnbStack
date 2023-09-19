@@ -194,13 +194,13 @@ export default function Nabar() {
       )}
 
       {showModalLogin && (
-        <>
+   
           <ModalLogin
             close={showModalLogin}
             setClose={setShowModalViewLogin}
             handleClose={() => handleCloseModal("Login")}
           />
-        </>
+
       )}
 
       {showModalRegister && (

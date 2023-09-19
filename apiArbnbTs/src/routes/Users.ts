@@ -3,7 +3,9 @@ import { ControlerUsers } from "../controllers/users/index"
 import { ValidateData } from "../middlewares/users/validateData";
 import { authLogin } from "../middlewares/users/auth";
 
+
 const Rotauser = Router()
+
 
 
 Rotauser.get('/users',ControlerUsers.getAllUsers);

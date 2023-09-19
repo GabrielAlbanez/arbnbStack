@@ -91,8 +91,8 @@ export default function Account() {
       {name && email ? (
         <div className="flex flex-col gap-6">
           <div className="relative w-[100px] h-[100px]">
-            {img ? (
-              <img src={img} alt="Selected" className="object-cover w-full h-full rounded-lg" />
+            {imgCliente ? (
+              <img src={imgCliente.img} alt="Selected" className="object-cover w-full h-full rounded-lg" />
             ) : (
               <img src={perfil} alt="Default" className="object-cover w-full h-full rounded-lg" />
             )}
