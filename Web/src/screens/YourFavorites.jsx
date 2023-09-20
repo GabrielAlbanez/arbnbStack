@@ -36,7 +36,7 @@ export default function YourFavorites() {
     const fechtFavorites = async () => {
       try {
         const response = await fetch(
-          `http://10.53.49.43:8080/userFavorite/${email}`,
+          `http://localhost:8080/userFavorite/${email}`,
           {
             cache: "no-store",
             method: "GET",

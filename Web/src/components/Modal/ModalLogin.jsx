@@ -58,6 +58,7 @@ export default function ModalLogin({ handleClose }) {
                 Cookies.set('email',decodeURIComponent(responseData.user.emailDatabase.email))
           
                 handleClose()
+                window.location.reload()
             }
             console.log(responseData)
             

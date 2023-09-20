@@ -30,7 +30,7 @@ const CasaFavoritada = () => {
 
     const getHomeByid = async () => {
         try {
-            const url = `http://10.53.49.43:8080/casa/${id}`;
+            const url = `http://localhost:8080/casa/${id}`;
             const response = await fetch(url, {
                 cache: "no-store",
             });
