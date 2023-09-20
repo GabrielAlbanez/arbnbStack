@@ -1,47 +1,44 @@
-import Cookies from 'js-cookie';
-import React, { useEffect, useState, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSessionLogin } from '../context/SessionLogin';
-import { useTema } from '../context/Contexto';
-import { FaCamera } from 'react-icons/fa'; // Importe o ícone desejado
-import perfil from '../assets/imgs/perfilPadrão.avif';
+import Cookies from "js-cookie";
+import React, { useEffect, useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSessionLogin } from "../context/SessionLogin";
+import { useTema } from "../context/Contexto";
+import { FaCamera } from "react-icons/fa"; // Importe o ícone desejado
+import perfil from "../assets/imgs/perfilPadrão.avif";
 
 export default function Account() {
-  const { isLoggedIn, setisLoggedIn, dataUser, setDataUser,imgCliente } = useSessionLogin();
+  const { isLoggedIn, setisLoggedIn, dataUser, setDataUser, imgCliente } =
+    useSessionLogin();
   const navigate = useNavigate();
   const { showModalPerfil, setShowModalPeril } = useTema();
   const local = useLocation();
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const [img,setImg] = useState(null)
+  const [img, setImg] = useState(null);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (!name && !email) {
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 2000);
     } else {
       setDataUser({
-        name: Cookies.get('name'),
-        email: Cookies.get('email'),
+        name: Cookies.get("name"),
+        email: Cookies.get("email"),
       });
       setisLoggedIn(true);
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
-    if (local.pathname === '/account') {
+    if (local.pathname === "/account") {
       setShowModalPeril(false);
     }
   }, []);
 
-  
-
-
-
-  const name = Cookies.get('name');
-  const email = Cookies.get('email');
+  const name = Cookies.get("name");
+  const email = Cookies.get("email");
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -50,23 +47,19 @@ export default function Account() {
       reader.onloadend = () => {
         setImg(reader.result);
       };
-      
+
       reader.readAsDataURL(file);
     }
-
-
   };
 
   const openFileInput = () => {
     fileInputRef.current.click();
   };
 
-
   const updateImg = async () => {
     try {
-
       const data = { email, img }; // Crie um objeto com os campos email e img
-      const dataJson = JSON.stringify(data)
+      const dataJson = JSON.stringify(data);
       const response = await fetch("http://localhost:8080/updateImgPerfil", {
         method: "POST",
         headers: {
@@ -74,27 +67,34 @@ export default function Account() {
         },
         body: dataJson, // Transforme o objeto em uma string JSON
       });
-  
-      const responseData = await response.json()
-      console.log(responseData)
-      console.log(data)
+
+      const responseData = await response.json();
+      console.log(responseData);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
 
- console.log(img)
-
+  console.log(img);
 
   return (
-    <div className="text-3xl p-8">
+    <div className="text-3xl p-8 ">
       {name && email ? (
         <div className="flex flex-col gap-6">
           <div className="relative w-[100px] h-[100px]">
             {imgCliente ? (
-              <img src={imgCliente.img} alt="Selected" className="object-cover w-full h-full rounded-lg" />
+              <img
+                src={imgCliente.img}
+                alt="Selected"
+                className="object-cover w-full h-full rounded-lg"
+              />
             ) : (
-              <img src={perfil} alt="Default" className="object-cover w-full h-full rounded-lg" />
+              <img
+                src={perfil}
+                alt="Default"
+                className="object-cover w-full h-full rounded-lg"
+              />
             )}
             {/* Botão de troca de imagem */}
             <button
@@ -109,16 +109,20 @@ export default function Account() {
             accept="image/*"
             onChange={handleImageChange}
             ref={fileInputRef}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
 
-          <div>
+          <div className="flex flex-col gap-10 ">
+            <button
+              onClick={updateImg}
+              className="border-[1px] rounded-xl border-rose-500 w-[8%] text-center"
+            >
+              att img
+            </button>
 
-            <h1>Welcome: {dataUser?.name}</h1>
+            <h1>Name: {dataUser?.name}</h1>
             <h1>Email: {dataUser?.email}</h1>
             <img src={imgCliente} alt="" />
-                
-            <button onClick={updateImg} className='border-[1px] rounded-xl border-rose-500'>att img</button>
           </div>
         </div>
       ) : (
