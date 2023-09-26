@@ -10,9 +10,7 @@ import Cookies from "js-cookie";
 
 const CasaFavoritada = () => {
     const { id } = useParams();
-    localStorage.setItem('clik', false)
     const [click, setClick] = useState(false);
-    const { isLoggedIn, setisLoggedIn } = useSessionLogin();
     const [showToas, setshowToas] = useState(false);
     const navigate = useNavigate()
     const closeToaster = () => {

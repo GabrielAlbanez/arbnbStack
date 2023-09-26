@@ -1,0 +1,14 @@
+/* Toaster.css */
+
+.toaster {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    transform: translateX(100%); /* Inicialmente, fora da tela à direita */
+    transition: transform 0.5s ease-in-out; /* Transição de 0.5 segundos com efeito de easing */
+  }
+  
+  .toaster-visible {
+    transform: translateX(0); /* Quando visível, aparece da esquerda para a direita */
+  }
+  

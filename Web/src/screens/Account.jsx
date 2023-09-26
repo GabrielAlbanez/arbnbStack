@@ -79,10 +79,20 @@ export default function Account() {
   console.log(img);
 
   return (
-    <div className="text-3xl p-8 ">
+    <div className=" p-10 overflow-auto scrollbar-hide">
       {name && email ? (
-        <div className="flex flex-col gap-6">
-          <div className="relative w-[100px] h-[100px]">
+        <div className="flex justify-between items-start gap-10 h-[90vh] p-10 overflow-hidden ">
+
+
+          <div className="flex flex-col justify-start pt-16 gap-10 h-[50%] ">
+
+
+            <h1 className="text-3xl">Name: {dataUser?.name}</h1>
+            <h1 className="text-3xl">Email: {dataUser?.email}</h1>
+
+          </div>
+
+          <div className="relative w-[30%] h-[40%] flex flex-col justify-center items-center gap-5">
             {imgCliente ? (
               <img
                 src={imgCliente.img}
@@ -90,18 +100,26 @@ export default function Account() {
                 className="object-cover w-full h-full rounded-lg"
               />
             ) : (
+
               <img
                 src={perfil}
                 alt="Default"
                 className="object-cover w-full h-full rounded-lg"
               />
+
             )}
             {/* Botão de troca de imagem */}
             <button
-              className="    absolute  top-0 left-16 bg-blue-500 text-white p-2 rounded-full"
+              className="    absolute  top-0 left-2 bg-blue-500 text-white p-2 rounded-full"
               onClick={openFileInput}
             >
-              <FaCamera size={25} />
+              <FaCamera size={30} />
+            </button>
+            <button
+              onClick={updateImg}
+              className="border-[1px] rounded-xl border-rose-500 w-[20%] h-[10%] text-center"
+            >
+              att img
             </button>
           </div>
           <input
@@ -112,18 +130,7 @@ export default function Account() {
             style={{ display: "none" }}
           />
 
-          <div className="flex flex-col gap-10 ">
-            <button
-              onClick={updateImg}
-              className="border-[1px] rounded-xl border-rose-500 w-[8%] text-center"
-            >
-              att img
-            </button>
 
-            <h1>Name: {dataUser?.name}</h1>
-            <h1>Email: {dataUser?.email}</h1>
-            <img src={imgCliente} alt="" />
-          </div>
         </div>
       ) : (
         <>

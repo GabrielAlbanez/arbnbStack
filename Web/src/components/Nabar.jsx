@@ -12,6 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
 import ModalPerfil from "./Modal/ModalPerfil";
 import { useTema } from "../context/Contexto";
+import "./navbar.css"
 export default function Nabar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModalLogin, setShowModalViewLogin] = useState(false);
@@ -102,6 +103,15 @@ export default function Nabar() {
       return () => clearTimeout(timer);
     }
   }, [visible]);
+
+
+  useEffect(() => {
+    if (showModalLogin || showModalPerfil || showModalRegister) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [showModalLogin,showModalPerfil,showModalRegister]);
 
 
 

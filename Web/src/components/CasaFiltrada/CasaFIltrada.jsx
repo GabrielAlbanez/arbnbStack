@@ -11,9 +11,8 @@ import Cookies from "js-cookie";
 
 export default function CasaFIltrada() {
   const { id } = useParams();
-   localStorage.setItem('clik',false)
+  localStorage.setItem('clik', false)
   const [click, setClick] = useState(false);
-  const { isLoggedIn, setisLoggedIn } = useSessionLogin();
   const [showToas, setshowToas] = useState(false);
   const closeToaster = () => {
     setshowToas(false);
@@ -27,7 +26,7 @@ export default function CasaFIltrada() {
       setClick((click) => !click);
     } else {
       setshowToas(true);
-      
+
       console.log(showToas);
     }
   };
@@ -58,23 +57,24 @@ export default function CasaFIltrada() {
 
   const markFavorite = async () => {
     try {
-        const response = await fetch("http://localhost:8080/MarkFavorite", {
+      const response = await fetch("http://localhost:8080/MarkFavorite", {
 
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({email,id}),
-        });
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, id }),
+      });
 
-        const responseData = await response.json()
-        // setClick(true)
-        
+      const responseData = await response.json()
+      // setClick(true)
+
     }
     catch (error) {
-        console.log(error)
+      console.log(error)
     }
-}
+    setshowToas(true)
+  }
 
   const imagensArray = dataById.data ? JSON.parse(dataById.data.imagens) : [];
 
@@ -100,14 +100,14 @@ export default function CasaFIltrada() {
           style={{ animation: "slideOutToTop 0.8s " }}
         >
           <div className="h-[100vh] w-[80%] pt-10">
-          {showToas && (
-          <Toaster
-            setVisible={setshowToas}
-            visible={showToas}
-            hasClose={closeToaster} // Usar a função closeToaster para fechar o Toaster
-            mensagem={'Você precisa estar logado'}
-          />
-        )}
+            {showToas && (
+              <Toaster
+                setVisible={setshowToas}
+                visible={showToas}
+                hasClose={closeToaster} // Usar a função closeToaster para fechar o Toaster
+                mensagem={'Você precisa estar logado'}
+              />
+            )}
             <div className="flex flex-col gap-4">
               <h1 className="text-3xl ">{dataById.data.Local}</h1>
               <div className="flex items-center gap-3 pr-5">
@@ -127,14 +127,24 @@ export default function CasaFIltrada() {
                   <div className="flex gap-2 items-center">
                     <p>Salvar</p>
                     <div onClick={verifyLogin} className="cursor-pointer">
-                      {!click  ? (
-                        
+                      {!click ? (
+
                         <AiOutlineHeart onClick={markFavorite} size={25} />
-                        
+
                       ) : (
                         <AiFillHeart size={25} />
+
                       )}
+                
                     </div>
+                    {showToas && (
+              <Toaster
+                setVisible={setshowToas}
+                visible={showToas}
+                hasClose={closeToaster} // Usar a função closeToaster para fechar o Toaster
+                mensagem={'Casa Favoritada'}
+              />
+            )}
                   </div>
                 </div>
               </div>
