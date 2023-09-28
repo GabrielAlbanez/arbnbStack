@@ -135,16 +135,16 @@ export default function CasaFIltrada() {
                         <AiFillHeart size={25} />
 
                       )}
-                
+
                     </div>
                     {showToas && (
-              <Toaster
-                setVisible={setshowToas}
-                visible={showToas}
-                hasClose={closeToaster} // Usar a função closeToaster para fechar o Toaster
-                mensagem={'Casa Favoritada'}
-              />
-            )}
+                      <Toaster
+                        setVisible={setshowToas}
+                        visible={showToas}
+                        hasClose={closeToaster} // Usar a função closeToaster para fechar o Toaster
+                        mensagem={name && email ? "casa favoritada" : "vc prcisa estar logado para favoritar"}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

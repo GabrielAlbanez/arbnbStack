@@ -131,19 +131,7 @@ export default function Nabar() {
           <img src={logo} alt="" height={130} width={130} />{" "}
         </LinkPersonalizado>
 
-        <div className="hidden sm:block pl-16">
-          <div
-            className=" flex items-center justify-between w-[35vh] 
-      h-[4vh] px-4 shadow-md transition hover:shadow-xl border-[1px] rounded-full"
-          >
-            <div className="flex flex-row items-center justify-between w-[100%] cursor-pointer">
-              <p className="">comece sua busca</p>
-              <div className="rounded-full flex items-center">
-                <CiSearch size={23} className="bg-white" />
-              </div>
-            </div>
-          </div>
-        </div>
+      
         {name && email ? (
           <>
             <div className="flex gap-4 items-center rounded-full border-[1px] py-2 px-2 shadow-md cursor-pointer transition hover:shadow-xl hover:shadow-zinc-300 ">
