@@ -5,7 +5,7 @@ import cors from "cors";
 import session from "express-session";
 
 const app = express()
-const porta = process.env.PORT || 8080
+const porta = process.env.PORT || 5050
 app.use(express.json())
 app.use(cors({
     origin: 'http://localhost:3000', // Substitua pelo endereço do seu cliente
