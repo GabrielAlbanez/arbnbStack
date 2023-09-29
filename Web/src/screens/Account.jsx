@@ -46,6 +46,7 @@ export default function Account() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImg(reader.result);
+        setSelectedImage(reader.result)
       };
 
       reader.readAsDataURL(file);
@@ -102,7 +103,7 @@ export default function Account() {
             ) : (
 
               <img
-                src={perfil}
+                src={selectedImage ? selectedImage : perfil}
                 alt="Default"
                 className="object-cover w-full h-full rounded-lg"
               />
