@@ -77,7 +77,7 @@ export default function Account() {
     }
   };
 
-  console.log(img);
+   
 
   return (
     <div className=" p-10 overflow-auto scrollbar-hide">
@@ -94,16 +94,16 @@ export default function Account() {
           </div>
 
           <div className="relative w-[30%] h-[40%] flex flex-col justify-center items-center gap-5">
-            {imgCliente ? (
+            {imgCliente?.img?  (
               <img
-                src={imgCliente.img}
+                src={imgCliente?.img}
                 alt="Selected"
                 className="object-cover w-full h-full rounded-lg"
               />
             ) : (
 
               <img
-                src={selectedImage ? selectedImage : perfil}
+                src={perfil}
                 alt="Default"
                 className="object-cover w-full h-full rounded-lg"
               />

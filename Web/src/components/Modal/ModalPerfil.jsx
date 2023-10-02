@@ -39,7 +39,7 @@ export default function ModalPerfil({ handleClose, children }) {
           <main className=" h-[100%]  ">
             <div className="text-2xl flex items-end justify-center pt-20  h-[10%]">
               <div className="rounded-full border-[1px] py-2 px-2 shadow-md cursor-pointer transition hover:shadow-xl hover:shadow-zinc-300">
-                {imgCliente ? (<><img className="object-cover w-[50px] h-[50px] rounded-full" src={imgCliente.img} alt="" /></>) : (<><BsPerson size={40} color="gray" /></>)}
+                {imgCliente?.img ? (<><img className="object-cover w-[50px] h-[50px] rounded-full" src={imgCliente.img} alt="" /></>) : (<><BsPerson size={40} color="gray" /></>)}
               </div>
             </div>
             <div className="flex items-center justify-center">{children}</div>
