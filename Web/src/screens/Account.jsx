@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSessionLogin } from "../context/SessionLogin";
 import { useTema } from "../context/Contexto";
 import { FaCamera } from "react-icons/fa"; // Importe o ícone desejado
-import perfil from "../assets/imgs/perfilPadrão.avif";
+import perfil from "../assets/imgs/imgPerfil.jfif";
 
 export default function Account() {
   const { isLoggedIn, setisLoggedIn, dataUser, setDataUser, imgCliente } =
@@ -94,7 +94,7 @@ export default function Account() {
           </div>
 
           <div className="relative w-[30%] h-[40%] flex flex-col justify-center items-center gap-5">
-            {imgCliente?.img?  (
+            {imgCliente?.img ?  (
               <img
                 src={imgCliente?.img}
                 alt="Selected"
